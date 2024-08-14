@@ -27,23 +27,30 @@
         <p class="login-box-msg">Register a new membership</p>
 
         <form action="<?= base_url('auth/register') ?>" method="post">
-          <?= session()->getFlashdata('validate') ? session()->getFlashdata('validate')->listErrors() : '' ?>
+          <?php if (session()->getFlashdata('validate')): ?>
+            <div class="alert alert-danger">
+              <?= session()->getFlashdata('validate')->listErrors() ?>
+            </div>
+          <?php endif; ?>
+
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="name" placeholder="nama">
+            <input type="text" class="form-control" name="name" placeholder="Name" value="<?= old('name') ?>">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
               </div>
             </div>
           </div>
+
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="username" placeholder="username">
+            <input type="text" class="form-control" name="username" placeholder="Username" value="<?= old('username') ?>">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
               </div>
             </div>
           </div>
+
           <div class="input-group mb-3">
             <input type="password" class="form-control" name="password" placeholder="Password">
             <div class="input-group-append">
@@ -55,8 +62,8 @@
 
           <div class="input-group mb-3">
             <select name="level" class="form-control">
-              <option value="user"> User</option>
-              <option value="admin"> Admin</option>
+              <option value="user" <?= old('level') == 'user' ? 'selected' : '' ?>>User</option>
+              <option value="admin" <?= old('level') == 'admin' ? 'selected' : '' ?>>Admin</option>
             </select>
           </div>
 
