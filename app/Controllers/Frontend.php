@@ -6,17 +6,22 @@ use CodeIgniter\Controller;
 
 class Frontend extends Controller
 {
-    public function index(): string
+    public function index()
     {
+
         return view('frontend/login');
     }
-    
-    public function register(): string
+
+
+    public function register(): String
     {
         session();
         $data = [
-            'validate' => \Config\Services::validation()
+            'validate' => \Config\Services::validation(),
         ];
         return view('frontend/register', $data);
     }
+
+    //--------------------------------------------------------------------
+
 }
